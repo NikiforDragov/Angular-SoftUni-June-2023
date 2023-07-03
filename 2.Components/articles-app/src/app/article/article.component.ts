@@ -20,4 +20,15 @@ export class ArticleComponent {
   showHideBtn: boolean = false;
   imageIsShown: boolean = false;
   imageButtonTitle: string = 'Show Image';
+
+  readMore(): void {
+    this.articleDescLen += this.symbols;
+
+    if (this.articleDescLen >= this.articleDesc.length) {
+      this.showHideBtn = true;
+      this.showReadMoreBtn = false;
+    } else {
+      this.descToShow = this.articleDesc.substring(0, this.articleDescLen);
+    }
+  }
 }
