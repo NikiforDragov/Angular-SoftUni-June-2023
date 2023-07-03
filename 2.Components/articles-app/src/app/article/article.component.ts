@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Article } from '../models/article.model';
 
 @Component({
   selector: 'app-article',
@@ -6,42 +7,44 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent {
-  constructor() {
-    this.articleDescLen = 0;
-    this.descToShow = '';
-  }
-  private symbols: number = 250;
-  @Input() article: Article;
-  @Input() articleDesc: string;
-
+  private symbol: number = 250;
+  @Input()
+  article!: Article;
+  @Input()
+  articleDesc!: string;
   descToShow: string;
   articleDescLen: number;
   showReadMoreBtn: boolean = true;
   showHideBtn: boolean = false;
   imageIsShown: boolean = false;
-  imageButtonTitle: string = 'Show Image';
+  imageButtonTitle: string = "Show Image";
 
-  readMore(): void {
-    this.articleDescLen += this.symbols;
+  constructor() {
+    this.articleDescLen = 0;
+    this.descToShow = '';
+  }
 
-    if (this.articleDescLen >= this.articleDesc.length) {
+  readMore() {
+    this.articleDescLen += this.symbol;
+    
+    if(this.articleDescLen >= this.articleDesc.length){
       this.showHideBtn = true;
       this.showReadMoreBtn = false;
     } else {
-      this.descToShow = this.articleDesc.substring(0, this.articleDescLen);
+      this.descToShow = this.articleDesc.substr(0, this.articleDescLen);
     }
   }
 
   toggleImage(): void {
     this.imageIsShown = !this.imageIsShown;
-    this.imageButtonTitle =
-      this.imageButtonTitle === 'Show Image' ? 'Hide Image' : 'Show Image';
+    this.imageButtonTitle === "Show Image" ? "Hide Image" : "Show Image";
   }
 
-  hideDesc() : void {
+  hideDesc() { 
     this.descToShow = '';
     this.articleDescLen = 0;
+    this.showReadMoreBtn  = true;
     this.showHideBtn = false;
-    this.showReadMoreBtn = true;
   }
+  
 }

@@ -1,5 +1,5 @@
 import { Article } from '../models/article.model';
-import { data } from '../data/seed';
+import { data } from './seed';
 
 export class ArticleData {
   getData(): Article[] {
@@ -13,7 +13,6 @@ export class ArticleData {
         data[i].imageUrl
       );
     }
-
     return articles;
   }
 }
