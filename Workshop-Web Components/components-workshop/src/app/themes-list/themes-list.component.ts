@@ -8,13 +8,21 @@ import { Theme } from '../types/theme';
   styleUrls: ['./themes-list.component.css'],
 })
 export class ThemesListComponent implements OnInit {
-  themesList: Theme[] = []
+  themesList: Theme[] = [];
+  isLoading: boolean = true;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.getThemes().subscribe((themes) => {
-      this.themesList = themes
+    this.apiService.getThemes().subscribe({
+      next: (themes) => {
+        this.themesList = themes;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error(`Error ${err}`);
+      },
     });
   }
 }
