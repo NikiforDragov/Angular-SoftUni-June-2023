@@ -1,0 +1,40 @@
+<hr />
+<form #loginForm="ngForm" (ngSubmit)="submitHandler()">
+  <!-- Email -->
+  <div class="class-form">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      ngModel
+      email
+      required
+      #emailInput="ngModel"
+    />
+  </div>
+  <!-- Email error message -->
+  <div *ngIf="emailInput.touched">
+    <div *ngIf="emailInput.errors?.['required']">Email is required!</div>
+    <div *ngIf="emailInput.errors?.['email']">Invalid EMAIL!</div>
+  </div>
+  <hr />
+  <!-- Password -->
+  <div class="class-form">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      ngModel
+      #passwordInput="ngModel"
+      [appMaxCount]="4"
+    />
+  </div>
+  <hr />
+  <!-- Password error message -->
+  <div *ngIf="passwordInput.errors?.['appMaxCount']">
+    Invalid password - too long {{passwordInput.errors?.['appMaxCount']}}
+  </div>
+  <button>Login</button>
+</form>
