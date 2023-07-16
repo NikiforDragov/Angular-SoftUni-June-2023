@@ -123,7 +123,7 @@
         </ng-container>
       </ng-container>
 
-      <button>Create Account</button>
+      <button [disabled]="form.invalid">Create Account</button>
       <div>
         {{ form.value | json }}
       </div>

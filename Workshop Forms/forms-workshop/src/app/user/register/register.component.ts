@@ -23,13 +23,16 @@ export class RegisterComponent {
         rePassword: ['', [Validators.required]],
       },
       {
-        validators: [matchPasswordsValidator('password','rePassword')],
+        validators: [matchPasswordsValidator('password', 'rePassword')],
       }
     ),
   });
   constructor(private fb: FormBuilder) {}
 
   register(): void {
+    if (this.form.invalid) {
+      return;
+    }
     console.log(this.form.value);
   }
 }
